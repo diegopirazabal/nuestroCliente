@@ -32,9 +32,6 @@ public class AgregarUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// llamar a metodo de el package modelo, eso seria lo correcto para seguir MVC,
-		// patron de diseño
-		System.out.println("Defino invocacion al servicio");
         turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();
         
