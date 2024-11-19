@@ -1,0 +1,410 @@
+@font-face {                                                 /* Cada font-face define una fuente con un nombre especifico */ 
+    font-family: 'FacebookLetterFacesRegular';               /* Nombre de la fuente */
+    src: url('../fonts/facebolf-webfont.eot');
+    src: url('../fonts/FACEBOLF.OTF'),
+		 url('../fonts/facebolf-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/facebolf-webfont.woff') format('woff'),
+         
+         url('../fonts/facebolf-webfont.ttf') format('truetype'),
+         url('../fonts/facebolf-webfont.svg#FacebookLetterFacesRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+} 
+
+@font-face {
+    font-family: 'GameOverRegular';
+    src: url('../fonts/game_over-webfont.eot');
+    src: url('../fonts/game_over-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/game_over-webfont.woff') format('woff'),
+         url('../fonts/game_over-webfont.ttf') format('truetype'),
+         url('../fonts/game_over-webfont.svg#GameOverRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body{
+    background: none repeat scroll 0 0 rgb(0, 255, 255);             /*Color de fondo del Body, verde oscuro, none es no tiene imagen de fondo*/
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;      /* lucida grande es la fuente*/
+    margin: 0;                                                        /* la posicion incial del fondo es 0 X*/
+}
+
+h1 {
+   font-size: 40px           /*TamaÃ±o de los encabezados de nivel 1 */
+}
+
+/* Cabezal */
+
+#header {
+    background-color: rgb(0, 128, 255);                 /*Color de arriba, el verde claro*/
+    border-bottom: 5px solid rgb(255, 128, 0);            /*Color de borde mas oscuro*/
+    color: rgb(255, 128, 0);                              /*Blanco de la letra*/
+    overflow: hidden;
+    padding-bottom: 5px;                         /*Se agregan 3 pixeles en la parte interior del elelmento*/
+    padding-top: 5px;
+}
+
+#header .logo
+{
+    float: left;                                        /*Este es el fuente pero del icono o logo*/
+    font-family: "FacebookLetterFacesRegular";          /* gamebook*/
+    font-size: 52px;
+	letter-spacing: 1px;
+    margin-bottom: 3px;
+    margin-left: 80px;
+    margin-top: 27px;
+    
+}
+
+#header .logo a:hover {            /*Esto pone como enlace(a) cuando pongo el mouse en encima*/
+    text-decoration: none;                    
+}
+
+#header .subtitulo                       /*El estilo para el subtitulo del header*/
+{
+    font-size: 20px;                     /* Consulte datos del usuario*/
+    font-weight: normal;
+    margin-left: 600px;
+    margin-top: 62px;
+    color:white;
+    
+}
+
+#header .usuario {                      /*Estilo para la clase usuario del header */
+    bottom: 18px;
+    float: right;
+    font-size: 14px;
+    margin-right: 16px;
+    position: relative;
+}
+
+#header a
+{
+	color: rgb(255, 255, 0);
+	text-decoration:  none;
+}
+
+#header a:hover   /*Esto se aplica cuando el mouse pasa sobre el para el link*/
+{
+	text-decoration: underline;
+	text-shadow: 0px 0px 2px white;
+}
+
+/* footer */
+
+#footer                /*Estilo del footer*/
+{
+    background: url("../images/day_hills_top.png") repeat-x scroll 0 0 #009900; /*MontaÃ±as del footer*/
+    color: rgb(0, 0, 0);     /*Color del texto */
+    font-size: 0.9em;           /* 90 porciento del tamaÃ±o del fuente del padre*/
+    height: 69px;
+    padding-top: 66px;
+}
+
+#footer_copyright
+{
+    float:left;   /*El elemento de id copyrigth va del lado izquierdo*/
+}
+
+#footer_derecha{
+    float:right;
+}
+
+#footer div
+{
+	margin: 3px 10px;
+}
+
+/* general */
+
+#body-container            /*Aca va el fondo general el del cielo. Este id esta al final de header.jsp*/ 
+{
+  background: url("../images/day_background.png") repeat scroll 0 0 transparent;
+  padding-top: 60px;
+  padding-bottom: 80px;   /*Si por ej pongo 40px se achica el fonde de abajo*/
+}
+
+.main    /*Este es el estilo del main, el central con el login*/
+{
+    background: none repeat scroll 0 0 rgb(128, 255, 255);
+	border: 1px solid #CCCCCC;
+    margin: 0 auto;
+    width: 80%;
+	border-radius: 30px 30px 30px 30px;
+    box-shadow: 0 0 8px #FFFFFF;
+    padding: 30px;
+}
+
+/* iniciar */
+
+.contenedor_principal       /*Este en el iniciar.jsp*/
+{
+    clear: both;
+    padding: 10px;
+}
+
+.contenedor_principal .izquierda
+{
+    float:left;
+    border-right: 2px solid rgb(0, 0, 255);
+    padding: 25px;
+    margin: 25px;
+}
+
+.contenedor_principal .derecha
+{
+    padding: 25px;
+    margin: 25px;
+}
+
+.contenedor_principal .derecha input
+{
+    margin-top: 5px;
+}
+
+/* Perfil */                 /*Los id y class dentro de perfil.jsp*/
+
+#perfil_izquierda
+{
+    float:left;
+    border-right: 2px solid rgb(0, 0, 0);
+    padding: 25px;
+    margin: 25px;
+}
+
+#perfil_derecha
+{
+    padding: 25px;
+    margin: 25px;
+}
+
+/* Pagina de error */
+
+.error
+{
+    background-color:#FFEBE8;
+    border: 2px solid #DD3C10;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+
+.fila_input
+{
+    margin-top: 5px;
+}
+
+.fila_input label
+{
+    width: 100px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.fila_input label
+{
+    display: block;
+    float: left;
+    width: 120px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.fila_input .con_margen
+{
+    margin-left: 120px;
+}
+
+.formulario_centrar
+{
+    width: 500px;
+}
+
+.rotulo
+{
+    display: block;
+    float: left;
+    width: 140px;
+    font-size: 12px;
+    color:#808080;
+}
+
+.valor
+{
+    font-size: 12px;
+}
+
+/** pÃ¡gina de error **/
+
+#error_page
+{
+    color: white;
+}
+
+#error_page .gameover
+{
+	font-family: "GameOverRegular";
+    font-size: 14em;
+    margin-left: 25px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#error_page .main pre
+{
+	color: #000000;
+}
+
+#error_page .main
+{
+	margin-bottom: 30px;
+}
+
+#error_page p
+{
+	text-align: center;
+}
+
+#error_page #dead_mario
+{
+    background: url("../images/dead_mario.png") no-repeat scroll 0 0 transparent;
+    height: 40px;
+    position: absolute;
+    right: 15%;
+    top: 364px;
+    width: 38px;
+}
+
+/** Listar **/
+
+#listar {
+}
+
+#listar .usuario {
+	border-bottom: 1px solid rgb(192, 192, 192);
+    margin-top: 10px;
+    padding-bottom: 15px;
+    width: 50%;
+}
+
+#listar .usuario:last-child {
+	border-bottom: none;
+}
+
+#listar .usuario img
+{
+	height: 42px;
+}
+
+#listar .usuario .email {
+    display: block;
+    font-size: 0.8em;
+}
+#listar .usuario .derecha {
+    display: inline-block;
+}
+
+.usuario-info {
+    display: flex; /* Utiliza un contenedor flex para alinear elementos en línea */
+    align-items: center; /* Alinea verticalmente los elementos en el centro */
+}
+
+/* Estilos para las etiquetas */
+.etiquetaUsuario {
+   font-weight: bold; /* Texto en negrita */
+    display: block; /* Hace que las etiquetas se muestren como bloques */
+    text-align: center; /* Centra el texto en las etiquetas */
+    margin: 2000 auto; /* Centra horizontalmente las etiquetas */
+}
+/* Definición de estilos para el párrafo con ID "nombreParrafo" */
+.datosUsuario {
+    font-family: Arial, sans-serif; /* Tipo de letra */
+    color: #FF0000; /* Color de texto (rojo en este caso) */
+    font-size: 18px; /* Tamaño de fuente */
+    margin-top: 20px; /* Margen superior */
+    text-align: center; /* Alineación de texto al centro */
+    
+    
+}
+.containerBoton {
+	vertical-align: top;
+	
+    /*text-align: center; /* Centra el contenido horizontalmente */
+    padding-top: 50px; /* Añade espacio desde la parte superior */
+}
+.styled-button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    padding: 10px 20px; /* Espacio interior del botón (arriba/abajo, izquierda/derecha) */
+    font-size: 16px; /* Tamaño de fuente del botón */
+    border: none; /* Quita el borde del botón */
+    cursor: pointer; /* Cambia el cursor al pasar por encima del botón */
+    border-radius: 5px; /* Borde redondeado del botón */
+}
+
+.styled-button:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor por encima */
+}
+/* Estilo del contenedor del combo */
+
+#todosLosUsuario .contenedorCombo {
+  width: 200px; /* Ancho del contenedor */
+  /*position: relative; /* Posición relativa para que el menú desplegable esté contenido dentro */
+  /*margin: 0 auto; /* Centrar horizontalmente el contenedor */
+  display: flex; /* Activa Flexbox */
+  align-items: center; /* Centra verticalmente los elementos */
+  
+}
+/* Estilo del botón */
+#todosLosUsuario .styled-button2 {
+    /*flex: 1;  El botón ocupará el espacio restante */
+    margin-right: 50px; /* Espacio entre el botón y el select */
+    
+}
+/* Estilo del menú desplegable */
+#todosLosUsuario .comboSeleccion {
+   margin-left: 10px; /* Espacio entre el botón y el select */
+   width: 200px; /* Ancho del combo box */
+   height: 300px; /* Altura del combo box */
+
+}
+#izquierda
+{
+    font-style: italic;
+    color: #808080;
+}
+.centered-content {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    /*height: 100vh; /* Esto es opcional y ajustará la altura al 100% del viewport */
+}
+
+.centered-content h1 {
+    font-family: Arial, sans-serif;
+    font-style: italic; /* Esto establece la cursiva */
+    font-size: 1.5em; /* Tamaño de la letra en píxeles */
+}
+.fila_input #seleccion {
+ display: none;
+}
+#comboSeleccionNew {
+   margin-left: 10px; /* Espacio entre el botón y el select */
+   width: 300px; /* Ancho del combo box */
+   height: 30px; /* Altura del combo box */
+
+}
+.carousel-inner {
+    width: 300px; /* Ancho deseado para el carrusel */
+    height: 200px; /* Altura deseada para el carrusel */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que desborde el carrusel */
+}
+
+.miCarrusel img {
+    max-width: 100%; /* Ajusta el ancho de la imagen para que no desborde el carrusel */
+    max-height: 100%; /* Ajusta la altura de la imagen para que no desborde el carrusel */
+}
+
+
+
+
