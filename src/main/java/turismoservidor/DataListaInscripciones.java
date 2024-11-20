@@ -10,17 +10,17 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for dataListaClases complex type.
+ * <p>Java class for dataListaInscripciones complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="dataListaClases"&gt;
+ * &lt;complexType name="dataListaInscripciones"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="clases" type="{http://publicador/}dataTypeClase" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="inscripciones" type="{http://publicador/}dataTypeInscripcion" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -30,15 +30,15 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "dataListaClases", propOrder = {
+@XmlType(name = "dataListaInscripciones", propOrder = {
     "nombre",
-    "clases"
+    "inscripciones"
 })
-public class DataListaClases {
+public class DataListaInscripciones {
 
     protected String nombre;
     @XmlElement(nillable = true)
-    protected List<DataTypeClase> clases;
+    protected List<DataTypeInscripcion> inscripciones;
 
     /**
      * Gets the value of the nombre property.
@@ -65,36 +65,32 @@ public class DataListaClases {
     }
 
     /**
-     * Gets the value of the clases property.
+     * Gets the value of the inscripciones property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a <CODE>set</CODE> method for the clases property.
+     * This is why there is not a <CODE>set</CODE> method for the inscripciones property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getClases().add(newItem);
+     *    getInscripciones().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DataTypeClase }
+     * {@link DataTypeInscripcion }
      * 
      * 
      */
-    public List<DataTypeClase> getClases() {
-        if (clases == null) {
-            clases = new ArrayList<DataTypeClase>();
+    public List<DataTypeInscripcion> getInscripciones() {
+        if (inscripciones == null) {
+            inscripciones = new ArrayList<DataTypeInscripcion>();
         }
-        return this.clases;
+        return this.inscripciones;
     }
-
-	public void setClases(List<DataTypeClase> auxiliar2) {
-		this.clases = auxiliar2;	
-	}
 
 }

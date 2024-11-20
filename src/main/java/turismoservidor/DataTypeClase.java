@@ -34,12 +34,13 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dataTypeClase", propOrder = {
-    "cupo",
-    "fecha",
-    "fechaAlta",
+	"fecha",
+    "nombre",
     "hora",
+    "lugar",
     "imagen",
-    "lugar"
+    "fechaAlta",
+    "cupo"
 })
 public class DataTypeClase {
 
@@ -51,6 +52,7 @@ public class DataTypeClase {
     protected String hora;
     protected String imagen;
     protected String lugar;
+    protected String nombre;
 
     /**
      * Gets the value of the cupo property.
@@ -186,6 +188,10 @@ public class DataTypeClase {
      */
     public void setLugar(String value) {
         this.lugar = value;
+    }
+    
+    public String getNombre() {
+    	return nombre;
     }
 
 }

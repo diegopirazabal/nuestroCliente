@@ -19,16 +19,10 @@ pageEncoding="UTF-8"%>
     <!-- Referencia hora de estilo Bootstrap 4 CSS -->
 
     <title>Homepage</title>
-
-    <!-- referencia al CSS maestro -->
-    <link rel="stylesheet" type="text/css" href="styles/main.css" />
   </head>
 
   <body>
     <jsp:include page="/head.jsp" />
-
-    <% String catalinaBase = System.getProperty("catalina.base");
-    System.out.println("Tomcat Base: " + catalinaBase); %>
 
     <div
       id="carouselExampleSlidesOnly"
@@ -41,7 +35,7 @@ pageEncoding="UTF-8"%>
           <img
             class="d-block w-100"
             style="max-width: 50%; height: auto; margin: 0 auto"
-            src="imagenes/image.png"
+            src="imagenes/img1.jpg"
             alt="First slide"
           />
         </div>
@@ -49,7 +43,7 @@ pageEncoding="UTF-8"%>
           <img
             class="d-block w-100"
             style="max-width: 50%; height: auto; margin: 0 auto"
-            src="imagenes/arnorld.png"
+            src="imagenes/img2.jpg"
             alt="Second slide"
           />
         </div>
@@ -57,7 +51,7 @@ pageEncoding="UTF-8"%>
           <img
             class="d-block w-100"
             style="max-width: 50%; height: auto; margin: 0 auto"
-            src="imagenes/image2.png"
+            src="imagenes/img3.jpg"
             alt="Third slide"
           />
         </div>
@@ -89,5 +83,9 @@ pageEncoding="UTF-8"%>
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+
+    <div class="text-center">
+      <jsp:include page="/footer.jsp" />
+    </div>
   </body>
 </html>

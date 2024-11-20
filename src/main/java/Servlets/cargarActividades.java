@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import turismoservidor.ActividadNoExisteException_Exception;
+import turismoservidor.DataTypeUsuario;
 import turismoservidor.UsuarioNoExisteException_Exception;
 
 @WebServlet("/cargarActividades")
@@ -24,12 +25,10 @@ public class cargarActividades extends HttpServlet {
         turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();
 		HttpSession session = request.getSession();
-		Object logueado = session.getAttribute("usuario_logueado");
-		String x = logueado.toString();
-		String[] parts = x.split(" - ");
-		String sessionUsername = parts[0].trim(); // "carlos"
+		DataTypeUsuario usuario = (DataTypeUsuario) session.getAttribute("usuario_logueado");
+		String sessionUsername = usuario.getNickname(); // Usa el getter correspondiente.
 		try {
-			request.setAttribute("listaAct", port.listarTodas());
+			request.setAttribute("listaAct", port.listarTodas().getActividades());
 			request.setAttribute("tipoUsuario", port.verInfoUsuario(sessionUsername));
 			String referer = request.getHeader("referer"); // URL de la página anterior
 

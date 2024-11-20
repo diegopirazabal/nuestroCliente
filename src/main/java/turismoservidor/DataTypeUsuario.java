@@ -208,7 +208,7 @@ public class DataTypeUsuario {
      *     {@link Boolean }
      *     
      */
-    public Boolean isTipo() {
+    public Boolean getTipo() {
         return tipo;
     }
 
@@ -223,5 +223,7 @@ public class DataTypeUsuario {
     public void setTipo(Boolean value) {
         this.tipo = value;
     }
+
+	
 
 }

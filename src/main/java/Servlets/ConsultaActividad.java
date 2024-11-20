@@ -1,19 +1,15 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
-import dtos.dataTypeActividad;
-import dtos.dataTypeClase;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import logica.Fabrica;
-import logica.IControladorActividad;
-import logica.IControladorClase;
+import turismoservidor.DataListaClases;
+import turismoservidor.DataTypeActividad;
 
 @WebServlet("/ConsultaActividad")
 public class ConsultaActividad extends HttpServlet {
@@ -31,14 +27,14 @@ public class ConsultaActividad extends HttpServlet {
         System.out.println("La actividad que me traje a consultaActividad es: " + nombreActividad);
         turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();
-        dataTypeActividad actividad = null;
+        DataTypeActividad actividad = null;
 
         try {
             actividad = port.consultarActividad(nombreActividad);
             String lugar = actividad.getLugar();
             int duracion = actividad.getDuracion();
             double costo = actividad.getCosto();
-            List<dataTypeClase> auxiliar = null;
+            DataListaClases auxiliar = null;
             auxiliar = port.listarClasesPorActividad(nombreActividad);
             request.setAttribute("listaCla", auxiliar);
             request.setAttribute("nombre", nombreActividad);

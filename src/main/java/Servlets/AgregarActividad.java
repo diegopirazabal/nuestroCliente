@@ -1,8 +1,11 @@
 package Servlets;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,16 +37,17 @@ public class AgregarActividad extends HttpServlet {
         String lugar = request.getParameter("lugar");
         String entrenador = request.getParameter("entrenador");
         // opcional
-        String imagen = null;
+        String imagen = "casa";
 
         try {
             if (port.consultarUsuario(entrenador) == null) {
                 request.setAttribute("error", "El entrenador no existe.");
                 request.getRequestDispatcher("/inicioErroneo.jsp").forward(request, response);
             }
-
-            LocalDate fechaAlta = LocalDate.now(); // Fecha actual
-            port.crearActividad(nombre, descripcion, duracion, costo, lugar, Date.valueOf(fechaAlta), imagen,
+            GregorianCalendar calendar = new GregorianCalendar();
+            XMLGregorianCalendar fechaAlta = DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
+            // Fecha actual
+            port.crearActividad(nombre, descripcion, duracion, costo, lugar, fechaAlta, imagen,
                     entrenador);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
 
@@ -64,6 +68,9 @@ public class AgregarActividad extends HttpServlet {
         } catch (UsuarioRepetidoException_Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        } catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

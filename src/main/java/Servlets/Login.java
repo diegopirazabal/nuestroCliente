@@ -2,7 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 
-import dtos.dataTypeUsuario;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modelo.EstadoSesion; // Enumerado con el estado de la sesion
+import turismoservidor.DataTypeUsuario;
 import turismoservidor.UsuarioNoExisteException_Exception;
 
 /**
@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
 		turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();;
 
-		dataTypeUsuario result = null;
+		DataTypeUsuario result = null;
 		System.out.println("La user del form es: " + login);
 		System.out.println("La password del form es: " + password);
 

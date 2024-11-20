@@ -3,7 +3,8 @@ package Servlets;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -42,13 +43,13 @@ public class AgregarUsuario extends HttpServlet {
 		String apellido = request.getParameter("apellidoUsuario");
 		String email = request.getParameter("emailUsuario");
 		String fechaNac1 = request.getParameter("fechaNac1");
-		Date fechaNac = null;
-		try {
-			fechaNac = new SimpleDateFormat("yyyy-mm-dd").parse(fechaNac1);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		XMLGregorianCalendar fechaNac = null;
+//		try {
+//			fechaNac = new SimpleDateFormat("yyyy-mm-dd").parse(fechaNac1);
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		String contrasena = request.getParameter("passUsuario");
 		String contrasena2 = request.getParameter("passUsuario2");// para comparar
 		String disciplina = request.getParameter("disciplina");

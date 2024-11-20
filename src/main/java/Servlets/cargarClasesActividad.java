@@ -3,8 +3,6 @@ package Servlets;
 import java.io.IOException;
 import java.util.List;
 
-import dtos.dataTypeActividad;
-import dtos.dataTypeClase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import turismoservidor.ActividadNoExisteException_Exception;
 import turismoservidor.ClaseNoExisteException_Exception;
+import turismoservidor.DataListaActividades;
+import turismoservidor.DataListaClases;
+import turismoservidor.DataTypeActividad;
+import turismoservidor.DataTypeClase;
 
 @WebServlet("/cargarClasesActividad")
 public class cargarClasesActividad extends HttpServlet {
@@ -33,7 +35,7 @@ public class cargarClasesActividad extends HttpServlet {
 		String sessionUsername = parts[0].trim();
 		String actividad = request.getParameter("actividades");
 		System.out.println("La actividad que traigo a cargar clases es: " + actividad);
-		dataTypeActividad auxiliar;
+		DataTypeActividad auxiliar;
 		try {
 			auxiliar = port.consultarActividad(actividad);
 			request.setAttribute("nombreActividad", auxiliar.getNombre());
@@ -44,10 +46,10 @@ public class cargarClasesActividad extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<dataTypeClase> aux = null;
+		List<DataTypeClase> aux = null;
 		try {
-			aux = port.listarClasesPorActividad(actividad);
-
+			aux = port.listarClasesPorActividad(actividad).getClases();
+			System.out.println("LA LISTA DE CLASES QUE ROMPE TODO" + aux);
 			request.setAttribute("listaCla", aux);
 			request.getRequestDispatcher("/consultarActividad.jsp").forward(request, response);
 		} catch (ClaseNoExisteException_Exception e) {

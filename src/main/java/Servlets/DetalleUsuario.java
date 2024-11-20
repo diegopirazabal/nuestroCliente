@@ -2,12 +2,8 @@ package Servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import dtos.dataTypeActividad;
-import dtos.dataTypeClase;
-import dtos.dataTypeUsuario;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,10 +11,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import logica.Clase;
-import logica.Inscripcion;
 import turismoservidor.Actividad;
+import turismoservidor.Clase;
 import turismoservidor.ClaseNoExisteException_Exception;
+import turismoservidor.DataListaActividades;
+import turismoservidor.DataListaClases;
+import turismoservidor.DataListaInscripciones;
+import turismoservidor.DataTypeActividad;
+import turismoservidor.DataTypeClase;
+import turismoservidor.DataTypeInscripcion;
+import turismoservidor.DataTypeUsuario;
 import turismoservidor.UsuarioNoExisteException_Exception;
 
 @WebServlet("/DetalleUsuario")
@@ -33,22 +35,13 @@ public class DetalleUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession objSesion = request.getSession();
-		Object logueado = objSesion.getAttribute("usuario_logueado");
-		String x = logueado.toString();
-		String[] parts = x.split(" - ");
-
-		// Acceder a las partes
-		String sessionUsername = parts[0].trim(); // "carlos"
-		String sessionFullName = parts[1].trim(); // "Carlos Tevez"
-
-		// Imprimir los resultados
-		// System.out.println("Username: " + sessionUsername);
-		// System.out.println("Full Name: " + sessionFullName);
+		DataTypeUsuario usuario = (DataTypeUsuario) objSesion.getAttribute("usuario_logueado");
+		String sessionUsername = usuario.getNickname(); // Usa el getter correspondiente.
 		turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();;
 		String nickname = request.getParameter("nickname");
 
-		dataTypeUsuario result = null;
+		DataTypeUsuario result = null;
 		String prueba = request.getParameter("opciones");
 		System.out.println("veo q traigo de la lista de usuarios: " + prueba);
 		System.out.println("nickname: " + nickname);
@@ -67,27 +60,23 @@ public class DetalleUsuario extends HttpServlet {
 				request.setAttribute("email", result.getEmail());
 				request.setAttribute("iguales", false);
 				if (result.getTipo()) {// es Entrenador
-					List<dataTypeActividad> actividadesDelEntrenador = controlAct
-							.obtenerActividadesConfirmadasPorEntrenador(nickname);
-					List<dataTypeClase> clasesRelacionadas = new LinkedList<>(); // Inicializa la lista
-
-					for (int i = 0; i < actividadesDelEntrenador.size(); i++) { // Cambiado a i <
-																				// actividadesDelEntrenador.size()
-						List<dataTypeClase> clasesPorActividad = controlCla
-								.listarClasesPorActividad(actividadesDelEntrenador.get(i).getNombre());
-						clasesRelacionadas.addAll(clasesPorActividad); // Agrega las clases a la lista
+					DataListaActividades actividadesDelEntrenador = port.obtenerActividadesConfirmadasPorEntrenador(nickname);
+					List<DataTypeActividad> auxiliar = actividadesDelEntrenador.getActividades();
+					List<DataTypeClase> auxiliar2 = null;
+					DataListaClases clasesRelacionadas = new DataListaClases();
+					for (int i = 0; i < auxiliar.size(); i++) {
+						DataListaClases clasesPorActividad = port.listarClasesPorActividad(auxiliar.get(i).getNombre());
+						auxiliar2 = clasesPorActividad.getClases();		
+						System.out.println("Las clases que me traje de la actividad " + auxiliar.get(i).getNombre() + " son: " + auxiliar2 + " \n");
+						clasesRelacionadas.setClases(auxiliar2);						
 					}
-
-					// Ahora clasesRelacionadas contiene todas las clases relacionadas con las
-					// actividades del entrenador
-
-					request.setAttribute("disciplina", actividadesDelEntrenador);
-					request.setAttribute("auxiliar", clasesRelacionadas);
+					request.setAttribute("disciplina", auxiliar);
+					request.setAttribute("auxiliar", auxiliar2);
 					request.setAttribute("tipoUsuario", "Entrenador");
-				} else {// es Deportista
-					List<Inscripcion> listaInscripciones = port.listarInscripcionesPorClase(nickname);
-					System.out.println("LAS CLASES A LAS QUE ESTA INSCRITO SON: " + listaInscripciones);
-					request.setAttribute("inscripciones", listaInscripciones);
+				} else {
+					DataListaInscripciones listaInscripciones = port.listarInscripcionesPorClase(nickname);
+					List<DataTypeInscripcion> aux = listaInscripciones.getInscripciones();
+					request.setAttribute("inscripciones", aux);
 					request.setAttribute("tipoUsuario", "Deportista");
 				}
 				RequestDispatcher rd = request.getRequestDispatcher("/consultas.jsp");
@@ -111,17 +100,18 @@ public class DetalleUsuario extends HttpServlet {
 				request.setAttribute("email", result.getEmail());
 				request.setAttribute("iguales", true);
 				if (result.getTipo()) {
-					List<dataTypeActividad> actividadesDelEntrenador = controlAct
+					DataListaActividades actividadesDelEntrenador = port
 							.listarActividadesPorEntrenador(nickname);
 					request.setAttribute("disciplina", actividadesDelEntrenador);
 					request.setAttribute("tipoUsuario", "Entrenador");
 				} else {
-					List<Inscripcion> listaInscripciones = port.listarInscripcionesPorClase(nickname);
+					DataListaInscripciones listaInscripciones = port.listarInscripcionesPorClase(nickname);
+					List<DataTypeInscripcion> listaInscripciones2 = listaInscripciones.getInscripciones();
 					request.setAttribute("inscripciones", listaInscripciones);
 					request.setAttribute("tipoUsuario", "Deportista");
 					List<Double> listaCostos = new ArrayList<>(); // Lista para almacenar los costos
 
-					for (Inscripcion inscripcion : listaInscripciones) {
+					for (DataTypeInscripcion inscripcion : listaInscripciones2) {
 						// Obtén la clase asociada a la inscripción
 						Clase claseAsociada = inscripcion.getClase();
 						Actividad actividadDeLaClase = claseAsociada.getActividad();

@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import dtos.dataTypeUsuario;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import turismoservidor.DataTypeUsuario;
 import turismoservidor.UsuarioNoExisteException_Exception;
 
 /**
@@ -40,7 +42,7 @@ public class PerfilModificado extends HttpServlet {
 		String[] parts = x.split(" - ");
 		String sessionUsername = parts[0].trim(); // "carlos"
 		String sessionFullName = parts[1].trim(); // "Carlos Tevez"
-		dataTypeUsuario aux;
+		DataTypeUsuario aux;
 
 		try {
 			aux = port.verInfoUsuario(sessionUsername);
@@ -56,7 +58,7 @@ public class PerfilModificado extends HttpServlet {
 			request.setAttribute("apellido", aux.getApellido());
 			request.setAttribute("nickname", aux.getNickname());
 			request.setAttribute("email", aux.getEmail());
-			Date fecha = aux.getFNacimiento();
+			XMLGregorianCalendar fecha = aux.getFNacimiento();
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 			String fechaFormateada = sdf.format(fecha);
 			request.setAttribute("fecha", fechaFormateada);

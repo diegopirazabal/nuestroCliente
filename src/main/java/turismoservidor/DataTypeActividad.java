@@ -259,5 +259,11 @@ public class DataTypeActividad {
     public void setNombre(String value) {
         this.nombre = value;
     }
+    
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
 
 }

@@ -1,15 +1,18 @@
 package Servlets;
 
 import java.io.IOException;
+
 import java.util.Date;
 
-import dtos.dataTypeUsuario;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import turismoservidor.DataTypeUsuario;
 import turismoservidor.UsuarioNoExisteException_Exception;
 
 @WebServlet("/inscripcion")
@@ -31,10 +34,10 @@ public class inscripcion extends HttpServlet {
         String sessionUsername = parts[0].trim(); // "carlos"
         String sessionFullName = parts[1].trim(); // "Carlos Tevez"
         String clase = request.getParameter("clases");
-        Date fechaIns = new Date();
+        XMLGregorianCalendar fechaIns = null;
         String deportista = sessionUsername;
         try {
-            dataTypeUsuario aux = port.verInfoUsuario(deportista);
+            DataTypeUsuario aux = port.verInfoUsuario(deportista);
             
             if (aux.getTipo().equals(false)) {
                 port.agregarInscripcionAClase(deportista, clase, fechaIns);

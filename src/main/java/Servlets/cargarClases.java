@@ -1,9 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
-import dtos.dataTypeClase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import turismoservidor.ClaseNoExisteException_Exception;
+import turismoservidor.DataListaClases;
 
 @WebServlet("/cargarClases")
 public class cargarClases extends HttpServlet {
@@ -31,7 +30,7 @@ public class cargarClases extends HttpServlet {
         String sessionUsername = parts[0].trim();
         String actividad = request.getParameter("actividades");
         System.out.println("La actividad que traigo a cargar clases es: " + actividad);
-        List<dataTypeClase> aux = null;
+        DataListaClases aux = null;
         try {
             aux = port.listarClasesPorActividad(actividad);
             request.setAttribute("listaCla", aux);

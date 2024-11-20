@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import turismoservidor.Actividad;
 import turismoservidor.ActividadNoExisteException_Exception;
 import turismoservidor.ClaseRepetidaException_Exception;
+import turismoservidor.DataTypeUsuario;
 
 @WebServlet("/AgregarClase")
 public class AgregarClase extends HttpServlet {
@@ -28,11 +34,8 @@ public class AgregarClase extends HttpServlet {
 		turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();
 		HttpSession session = request.getSession();
-		Object logueado = session.getAttribute("usuario_logueado");
-		String x = logueado.toString();
-		String[] parts = x.split(" - ");
-		String sessionUsername = parts[0].trim(); // "carlos"
-		String sessionFullName = parts[1].trim(); // "Carlos Tevez"
+		DataTypeUsuario usuario = (DataTypeUsuario) session.getAttribute("usuario_logueado");
+		String sessionUsername = usuario.getNickname(); // Usa el getter correspondiente.
 
 		String nombre = request.getParameter("nombre");
 
@@ -52,15 +55,22 @@ public class AgregarClase extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Date fechaAlta = new Date();
+		GregorianCalendar calendar = new GregorianCalendar();
+        XMLGregorianCalendar fechaAlta = null;
+		try {
+			fechaAlta = DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String hora = request.getParameter("hora");
 
 		String cupoStr = request.getParameter("cupos"); // Obtener el valor como String
 		int cupo = Integer.parseInt(cupoStr);
-		String img = "";
+		String img = "casa";
 		String lugar = request.getParameter("lugar");
 		try {
-			port.crearClase(hora, null, cupoStr, img, fechaAlta, lugar, cupo, aux);
+			port.crearClase(hora, fechaAlta, cupoStr, img, fechaAlta, lugar, cupo, aux);
 		} catch (ClaseRepetidaException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -103,6 +103,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DataTypeClase }
+     * 
+     */
+    public DataTypeClase createDataTypeClase() {
+        return new DataTypeClase();
+    }
+
+    /**
      * Create an instance of {@link DataListaActividades }
      * 
      */
@@ -135,19 +143,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DataTypeClase }
-     * 
-     */
-    public DataTypeClase createDataTypeClase() {
-        return new DataTypeClase();
-    }
-
-    /**
      * Create an instance of {@link Actividad }
      * 
      */
     public Actividad createActividad() {
         return new Actividad();
+    }
+
+    /**
+     * Create an instance of {@link DataListaInscripciones }
+     * 
+     */
+    public DataListaInscripciones createDataListaInscripciones() {
+        return new DataListaInscripciones();
+    }
+
+    /**
+     * Create an instance of {@link DataTypeInscripcion }
+     * 
+     */
+    public DataTypeInscripcion createDataTypeInscripcion() {
+        return new DataTypeInscripcion();
     }
 
     /**

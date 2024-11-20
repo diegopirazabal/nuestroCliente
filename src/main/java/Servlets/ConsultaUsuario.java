@@ -1,9 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
-import dtos.dataTypeUsuario;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import turismoservidor.DataListaUsuarios;
 import turismoservidor.UsuarioNoExisteException_Exception;
 
 @WebServlet("/ConsultaUsuario")
@@ -35,7 +34,7 @@ public class ConsultaUsuario extends HttpServlet {
 
 		turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();;
-		List<dataTypeUsuario> result = null;
+		DataListaUsuarios result = null;
 		try {
 			result = port.listarTodos();
 		} catch (UsuarioNoExisteException_Exception e) {
