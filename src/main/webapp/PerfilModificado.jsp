@@ -106,13 +106,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                   />
                 </div>
               </div>
-              <button
-                type="submit"
-                id="botonGuardar"
-                class="btn btn-primary btn-block"
-              >
-                Guardar mis datos
-              </button>
+              
             </form>
           </div>
         </div>

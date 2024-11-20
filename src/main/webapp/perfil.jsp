@@ -119,14 +119,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                   />
                 </div>
               </div>
-              <button
-                type="submit"
-                id="botonGuardar"
-                name="botonGuardar"
-                class="btn btn-primary btn-block"
-              >
-                Guardar mis datos
-              </button>
             </form>
           </div>
         </div>
@@ -198,9 +190,13 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     var cajaNickname = document.getElementById("nickname");
     var cajaEmail = document.getElementById("email");
     var cajaFecha = document.getElementById("fecha");
+    var cajaNombre = document.getElementById("nombre");
+    var cajaApellido = document.getElementById("apellido");
     cajaNickname.readOnly = true;
     cajaEmail.readOnly = true;
     cajaFecha.readOnly = true;
+    cajaNombre.readOnly = true;
+    cajaApellido.readOnly = true;
     var prueba = document.getElementById("prueba").innerHTML;
     console.log(prueba);
     var botonGuardar = document.getElementById("botonGuardar");

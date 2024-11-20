@@ -47,24 +47,27 @@ public class Perfil extends HttpServlet {
 
 		try {
 			aux = port.verInfoUsuario(sessionUsername);
+			System.out.println("El usuario que despliego: " + aux.getNickname());
 			request.setAttribute("nombre", aux.getNombre());
 			request.setAttribute("prueba", aux.getNombre());
 			request.setAttribute("apellido", aux.getApellido());
 			request.setAttribute("nickname", aux.getNickname());
 			request.setAttribute("email", aux.getEmail());
 			XMLGregorianCalendar fecha = aux.getFNacimiento();
+			Date date = fecha.toGregorianCalendar().getTime(); // Convertir XMLGregorianCalendar a Date
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-			String fechaFormateada = sdf.format(fecha);
+			String fechaFormateada = sdf.format(date); // Formatear la fecha
 			request.setAttribute("fecha", fechaFormateada);
 
-			String nombre = request.getParameter("nombre");
-			String apellido = request.getParameter("apellido");
-			 port.editarNombreApellido(sessionUsername, nombre, apellido);
-			 aux = port.verInfoUsuario(sessionUsername);
-			 System.out.println("El usuario modificado es: " + aux.getNombre() + " " +
-			 aux.getApellido());
-			 request.getRequestDispatcher("/PerfilModificado.jsp").forward(request,
-			 response);
+			String nombre = request.getParameter("nuevoNombre");
+			String apellido = request.getParameter("nuevoApellido");
+			System.out.println("Nombre para modificar es: " + nombre + "\nApellido para modificar es: " + apellido);
+//			 port.editarNombreApellido(sessionUsername, nombre, apellido);
+//			 aux = port.verInfoUsuario(sessionUsername);
+//			 System.out.println("El usuario modificado es: " + aux.getNombre() + " " +
+//			 aux.getApellido());
+//			 request.getRequestDispatcher("/PerfilModificado.jsp").forward(request,
+//			 response);
 
 			request.getRequestDispatcher("/perfil.jsp").forward(request, response);
 

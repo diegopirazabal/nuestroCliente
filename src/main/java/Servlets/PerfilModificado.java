@@ -44,21 +44,24 @@ public class PerfilModificado extends HttpServlet {
 
 		try {
 			aux = port.verInfoUsuario(sessionUsername);
-			 String apellido = (String) request.getAttribute("apellido");
+			 String apellido = request.getParameter("nuevoApellido");
 			 String nombre = request.getParameter("nuevoNombre");
 			 System.out.println("El nombre nuevo es: " + nombre);
+			 System.out.println("El nombre apellido es: " + apellido);
+			 System.out.println("El username a modificar es: " + sessionUsername);
 			 port.editarNombreApellido(sessionUsername, nombre, apellido);
 			 aux = port.verInfoUsuario(sessionUsername);
 			
-			port.editarNombreApellido(sessionUsername, nombre, apellido);
-			aux = port.verInfoUsuario(sessionUsername);
 			request.setAttribute("nombre", aux.getNombre());
 			request.setAttribute("apellido", aux.getApellido());
 			request.setAttribute("nickname", aux.getNickname());
 			request.setAttribute("email", aux.getEmail());
 			XMLGregorianCalendar fecha = aux.getFNacimiento();
+			Date date = fecha.toGregorianCalendar().getTime(); // Convertir XMLGregorianCalendar a Date
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-			String fechaFormateada = sdf.format(fecha);
+			String fechaFormateada = sdf.format(date); // Formatear la fecha
+			//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			//String fechaFormateada = sdf.format(fecha);
 			request.setAttribute("fecha", fechaFormateada);
 			request.getRequestDispatcher("/PerfilModificado.jsp").forward(request, response);
 		} catch (UsuarioNoExisteException_Exception e) {
