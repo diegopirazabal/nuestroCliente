@@ -70,7 +70,7 @@ public class AgregarClase extends HttpServlet {
 		String img = "casa";
 		String lugar = request.getParameter("lugar");
 		try {
-			port.crearClase(hora, fechaAlta, cupoStr, img, fechaAlta, lugar, cupo, aux);
+			port.crearClase(nombre, fechaAlta, hora, lugar, fechaAlta, img, cupo, aux);
 		} catch (ClaseRepetidaException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -168,6 +168,7 @@ prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
         var cajaClases = document.getElementById("clasesList");
         var textoClases = document.getElementById("listaCla").innerHTML;
+        console.log(textoClases);
         var opcionesTexto2 = textoClases.replace(/^\[|\]$/g, "");
         var opciones2 = opcionesTexto2.split(",");
 

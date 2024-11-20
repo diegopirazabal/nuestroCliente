@@ -37,21 +37,19 @@ public class PerfilModificado extends HttpServlet {
 		HttpSession session = request.getSession();
 		turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();;
-		Object logueado = session.getAttribute("usuario_logueado");
-		String x = logueado.toString();
-		String[] parts = x.split(" - ");
-		String sessionUsername = parts[0].trim(); // "carlos"
-		String sessionFullName = parts[1].trim(); // "Carlos Tevez"
+        DataTypeUsuario usuario = (DataTypeUsuario) session.getAttribute("usuario_logueado");
+		
+        String sessionUsername = usuario.getNickname(); // Usa el getter correspondiente.
 		DataTypeUsuario aux;
 
 		try {
 			aux = port.verInfoUsuario(sessionUsername);
-			// String apellido = (String) request.getAttribute("apellido");
-			// System.out.println("El nombre nuevo es: " + nombre);
-			// icon.editarNombreApellido(sessionUsername, nombre, apellido);
-			// aux = icon.verInfoUsuario(sessionUsername);
-			String nombre = request.getParameter("nuevoNombre");
-			String apellido = request.getParameter("nuevoApellido");
+			 String apellido = (String) request.getAttribute("apellido");
+			 String nombre = request.getParameter("nuevoNombre");
+			 System.out.println("El nombre nuevo es: " + nombre);
+			 port.editarNombreApellido(sessionUsername, nombre, apellido);
+			 aux = port.verInfoUsuario(sessionUsername);
+			
 			port.editarNombreApellido(sessionUsername, nombre, apellido);
 			aux = port.verInfoUsuario(sessionUsername);
 			request.setAttribute("nombre", aux.getNombre());

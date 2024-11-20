@@ -2,8 +2,10 @@
 package turismoservidor;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 
@@ -35,12 +37,12 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dataTypeClase", propOrder = {
 	"fecha",
-    "nombre",
     "hora",
     "lugar",
     "imagen",
     "fechaAlta",
-    "cupo"
+    "cupo",
+    "nombre"
 })
 public class DataTypeClase {
 
@@ -52,6 +54,7 @@ public class DataTypeClase {
     protected String hora;
     protected String imagen;
     protected String lugar;
+    @XmlElement
     protected String nombre;
 
     /**
@@ -192,6 +195,10 @@ public class DataTypeClase {
     
     public String getNombre() {
     	return nombre;
+    }
+    
+    public void setNombre(String name) {
+    	this.nombre = name;
     }
 
 }

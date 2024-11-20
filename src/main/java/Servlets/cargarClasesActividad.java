@@ -15,6 +15,7 @@ import turismoservidor.DataListaActividades;
 import turismoservidor.DataListaClases;
 import turismoservidor.DataTypeActividad;
 import turismoservidor.DataTypeClase;
+import turismoservidor.DataTypeUsuario;
 
 @WebServlet("/cargarClasesActividad")
 public class cargarClasesActividad extends HttpServlet {
@@ -29,10 +30,8 @@ public class cargarClasesActividad extends HttpServlet {
 		turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();
 		HttpSession session = request.getSession();
-		Object logueado = session.getAttribute("usuario_logueado");
-		String x = logueado.toString();
-		String[] parts = x.split(" - ");
-		String sessionUsername = parts[0].trim();
+		DataTypeUsuario usuario = (DataTypeUsuario) session.getAttribute("usuario_logueado");	
+        String sessionUsername = usuario.getNickname(); // Usa el getter correspondiente.
 		String actividad = request.getParameter("actividades");
 		System.out.println("La actividad que traigo a cargar clases es: " + actividad);
 		DataTypeActividad auxiliar;
@@ -46,10 +45,12 @@ public class cargarClasesActividad extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<DataTypeClase> aux = null;
+		DataListaClases aux = null;
 		try {
-			aux = port.listarClasesPorActividad(actividad).getClases();
-			System.out.println("LA LISTA DE CLASES QUE ROMPE TODO" + aux);
+			aux = port.listarClasesPorActividad(actividad);
+			List<DataTypeClase> clasesParaPasar = aux.getClases();
+			System.out.println("LA LISTA DE CLASES QUE CARGO EN cargarClasesActividad es: " + aux + "\n");
+			System.out.println("LA LISTA DE CLASES QUE CARGO EN clasesParaPasar es: " + clasesParaPasar.get(0).getNombre() + "\n"); //DataTypeClase no toma nombre como atributo
 			request.setAttribute("listaCla", aux);
 			request.getRequestDispatcher("/consultarActividad.jsp").forward(request, response);
 		} catch (ClaseNoExisteException_Exception e) {

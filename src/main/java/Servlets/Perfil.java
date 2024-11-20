@@ -40,10 +40,9 @@ public class Perfil extends HttpServlet {
         turismoservidor.Publicador port= service.getPublicadorPort();;
 
 		Object logueado = session.getAttribute("usuario_logueado");
-		String x = logueado.toString();
-		String[] parts = x.split(" - ");
-		String sessionUsername = parts[0].trim(); // "carlos"
-		String sessionFullName = parts[1].trim(); // "Carlos Tevez"
+		DataTypeUsuario usuario = (DataTypeUsuario) session.getAttribute("usuario_logueado");
+		
+        String sessionUsername = usuario.getNickname(); // Usa el getter correspondiente.
 		DataTypeUsuario aux;
 
 		try {
@@ -60,12 +59,12 @@ public class Perfil extends HttpServlet {
 
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
-			// icon.editarNombreApellido(sessionUsername, nombre, apellido);
-			// aux = icon.verInfoUsuario(sessionUsername);
-			// System.out.println("El usuario modificado es: " + aux.getNombre() + " " +
-			// aux.getApellido());
-			// request.getRequestDispatcher("/PerfilModificado.jsp").forward(request,
-			// response);
+			 port.editarNombreApellido(sessionUsername, nombre, apellido);
+			 aux = port.verInfoUsuario(sessionUsername);
+			 System.out.println("El usuario modificado es: " + aux.getNombre() + " " +
+			 aux.getApellido());
+			 request.getRequestDispatcher("/PerfilModificado.jsp").forward(request,
+			 response);
 
 			request.getRequestDispatcher("/perfil.jsp").forward(request, response);
 

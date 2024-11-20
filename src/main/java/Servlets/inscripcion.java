@@ -28,11 +28,8 @@ public class inscripcion extends HttpServlet {
     	turismoservidor.PublicadorService service=new turismoservidor.PublicadorService();
         turismoservidor.Publicador port= service.getPublicadorPort();;
         HttpSession session = request.getSession();
-        Object logueado = session.getAttribute("usuario_logueado");
-        String x = logueado.toString();
-        String[] parts = x.split(" - ");
-        String sessionUsername = parts[0].trim(); // "carlos"
-        String sessionFullName = parts[1].trim(); // "Carlos Tevez"
+        DataTypeUsuario usuario = (DataTypeUsuario) session.getAttribute("usuario_logueado");
+        String sessionUsername = usuario.getNickname(); // Usa el getter correspondiente.
         String clase = request.getParameter("clases");
         XMLGregorianCalendar fechaIns = null;
         String deportista = sessionUsername;
